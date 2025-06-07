@@ -1,0 +1,197 @@
+# ============================================================================
+# Kanagawa Theme for ble.sh (Brighter Version)
+# Inspired by Kanagawa.vim colorscheme with enhanced brightness
+# ============================================================================
+
+# ============================================================================
+# AUTOSUGGESTIONS - Brighter but still subtle
+# ============================================================================
+
+# Make autosuggestions brighter and more visible (was 240, now 245)
+ble-face -s auto_complete fg=245,bg=none
+
+# Reduce autosuggestion delay for responsiveness  
+bleopt complete_auto_delay=50
+
+# ============================================================================
+# CORE SYNTAX HIGHLIGHTING - Brighter Kanagawa colors
+# ============================================================================
+
+# Default text - brighter fujiWhite (was 187, now 230)
+ble-face -s syntax_default fg=230
+
+# Commands - brighter crystalBlue (was 110, now 117) 
+ble-face -s command_builtin fg=117
+ble-face -s command_file fg=117  
+ble-face -s command_function fg=117
+ble-face -s command_keyword fg=81
+
+# Command aliases - brighter springViolet1 (was 103, now 141)
+ble-face -s command_alias fg=141
+
+# Directory commands - brighter waveAqua2 (was 108, now 115)
+ble-face -s command_directory fg=115,underline
+
+# Comments - brighter fujiGray (was 102, now 109) 
+ble-face -s syntax_comment fg=109
+
+# Errors - brighter samuraiRed (was 196, now 203)
+ble-face -s syntax_error fg=203,bg=none
+
+# Delimiters and braces - brighter springViolet2 (was 146, now 153)
+ble-face -s syntax_delimiter fg=153
+ble-face -s syntax_brace fg=153,bold
+
+# Quoted strings - brighter springGreen (was 107, now 114)
+ble-face -s syntax_quoted fg=114
+ble-face -s syntax_quotation fg=114,bold
+
+# Variables - brighter autumnYellow (was 179, now 186)
+ble-face -s syntax_varname fg=186
+
+# Function names - brighter oniViolet (was 140, now 147)
+ble-face -s syntax_function_name fg=147,bold
+
+# Parameters and expansions - brighter waveRed (was 174, now 181)
+ble-face -s syntax_param_expansion fg=181
+ble-face -s syntax_history_expansion fg=181,bg=none
+
+# Tilde expansion - brighter crystalBlue (was 110, now 117)
+ble-face -s syntax_tilde fg=117,bold
+
+# Glob patterns - brighter sakuraPink (was 175, now 182)
+ble-face -s syntax_glob fg=182,bold
+
+# Escape sequences - brighter boatYellow2 (was 179, now 186)
+ble-face -s syntax_escape fg=186
+
+# Documents - brighter oldWhite (was 180, now 187)
+ble-face -s syntax_document fg=187
+ble-face -s syntax_document_begin fg=187,bold
+
+# Expressions - brighter waveBlue2 (was 67, now 74)
+ble-face -s syntax_expr fg=74
+
+# ============================================================================
+# FILENAME HIGHLIGHTING - Brighter Kanagawa themed
+# ============================================================================
+
+# Directories - brighter waveAqua2 (was 108, now 115)
+ble-face -s filename_directory fg=120,underline
+
+# Executables - brighter springGreen
+ble-face -s filename_executable fg=120
+
+# Links - brighter crystalBlue (was 110, now 117)
+ble-face -s filename_link fg=120,underline
+
+# Special files - brighter colors
+ble-face -s filename_socket fg=117,bg=none,underline
+ble-face -s filename_pipe fg=114,bg=none,underline
+ble-face -s filename_block fg=186,bg=none,underline
+ble-face -s filename_character fg=230,bg=none,underline
+
+# File warnings - brighter samuraiRed (was 196, now 203)
+ble-face -s filename_warning fg=203,underline
+ble-face -s filename_orphan fg=203,bg=none,underline
+
+# URLs - brighter crystalBlue (was 110, now 117)
+ble-face -s filename_url fg=117,underline
+
+# ============================================================================
+# ARGUMENTS AND OPTIONS - Brighter
+# ============================================================================
+
+# Options - brighter oldWhite (was 180, now 187)
+ble-face -s argument_option fg=187
+
+# Argument errors - brighter samuraiRed (was 196, now 203)
+ble-face -s argument_error fg=203
+
+# ============================================================================
+# VARIABLE HIGHLIGHTING - Brighter Kanagawa themed
+# ============================================================================
+
+# Array variables - brighter autumnYellow (was 179, now 186)
+ble-face -s varname_array fg=186,bold
+
+# Exported variables - brighter sakuraPink (was 175, now 182) 
+ble-face -s varname_export fg=182,bold
+
+# New variables - brighter waveAqua1 (was 108, now 115)
+ble-face -s varname_new fg=115
+
+# Readonly variables - brighter sakuraPink (was 175, now 182)
+ble-face -s varname_readonly fg=182
+
+# Unset variables - brighter fujiGray (was 102, now 109)
+ble-face -s varname_unset fg=109
+
+# Empty variables - brighter waveBlue1 (was 237, now 244)
+ble-face -s varname_empty fg=244
+
+# Numeric variables - brighter autumnGreen (was 107, now 114)
+ble-face -s varname_number fg=114
+
+# Hash variables - brighter springGreen (was 107, now 114)
+ble-face -s varname_hash fg=114,bold
+
+# Transform variables - brighter waveAqua1 (was 108, now 115)
+ble-face -s varname_transform fg=115,bold
+
+# Expression variables - brighter oniViolet (was 140, now 147)
+ble-face -s varname_expr fg=147,bold
+
+# ============================================================================
+# COMPLETION MENU - Brighter Kanagawa themed
+# ============================================================================
+
+# Menu selection - brighter backgrounds (was 237, now 240)
+ble-face -s menu_filter_fixed fg=230,bg=240
+ble-face -s menu_filter_input fg=117,bg=240
+
+# Menu completion
+ble-face -s menu_complete_match bold
+ble-face -s menu_complete_selected reverse
+
+# ============================================================================
+# REGIONS AND SELECTIONS - Brighter
+# ============================================================================
+
+# Selection regions - brighter backgrounds (was 237, now 240)
+ble-face -s region fg=230,bg=240
+ble-face -s region_insert fg=117,bg=254
+
+# Search matches - brighter autumnYellow (was 179, now 186)
+ble-face -s region_match fg=186,bg=240
+ble-face -s region_target fg=117,bg=240
+
+# ============================================================================
+# UI ELEMENTS - Brighter
+# ============================================================================
+
+# Status line - brighter fujiGray (was 102, now 109) on lighter background (was 237, now 240)
+ble-face -s prompt_status_line fg=109,bg=240
+
+# Overwrite mode - brighter samuraiRed (was 196, now 203) background
+ble-face -s overwrite_mode fg=16,bg=203
+
+# Disabled elements - brighter fujiGray (was 102, now 109)
+ble-face -s disabled fg=109
+
+# Visual bell - brighter colors
+ble-face -s vbell reverse
+ble-face -s vbell_erase bg=252
+ble-face -s vbell_flash fg=114,reverse
+
+# ============================================================================
+# PROMPT AND BEHAVIOR SETTINGS
+# ============================================================================
+
+# Add subtle empty line between prompts for better readability
+bleopt prompt_ruler=empty-line
+
+# Fine-tune completion behavior
+bleopt complete_auto_history=1
+bleopt complete_ambiguous=1
+
