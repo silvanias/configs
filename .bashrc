@@ -129,3 +129,6 @@ bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 fastfetch
 source ~/.local/share/blesh/ble.sh
+
+# Created by `pipx` on 2025-06-13 09:46:36
+export PATH="$PATH:/home/silasm/.local/bin"
