@@ -1,13 +1,10 @@
 require("config.lazy")
-require("lualine").setup()
 vim.g.mapleader = " "
 
 require("mini.files").setup()
 vim.keymap.set("n", "<leader>e", function()
 	require("mini.files").open()
 end, { noremap = true, silent = true })
-
-require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
@@ -43,7 +40,7 @@ vim.opt.history = 1000 -- Store lots of command history
 vim.opt.undolevels = 1000 -- Lots of undo history
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldlevel = 3 
+vim.opt.foldlevel = 3
 
 -- Disable arrow keys to encourage using hjkl
 vim.keymap.set("n", "<Up>", "<Nop>", { noremap = true })

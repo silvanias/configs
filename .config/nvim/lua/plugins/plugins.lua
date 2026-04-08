@@ -42,9 +42,16 @@ return {
 			vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]])
 			vim.opt.updatetime = 300
 
-			require("lspconfig").puppet.setup({
-				capabilities = capabilities,
-			})
+			if vim.lsp and vim.lsp.config then
+				vim.lsp.config("puppet", {
+					capabilities = capabilities,
+				})
+				vim.lsp.enable("puppet")
+			else
+				require("lspconfig").puppet.setup({
+					capabilities = capabilities,
+				})
+			end
 		end,
 	},
 	{ "mason-org/mason.nvim", opts = {} },
