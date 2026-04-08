@@ -18,18 +18,37 @@ Personal macOS-focused dotfiles with Linux-inspired ergonomics.
 
 ## Bootstrap on macOS
 
+The script will:
+
+1. Ensure `brew`, `stow`, and `starship` are available.
+2. Install declared packages from `Brewfile` using `brew bundle`.
+3. Back up conflicting files to `~/.dotfiles-backup/<timestamp>/`.
+4. Stow shell and tmux dotfiles into `$HOME`.
+5. Symlink Neovim and Starship config from this repo into `~/.config`.
+
+## Track installed packages
+
+This repo includes a `Brewfile` so machine setup is reproducible.
+
+- Install all declared packages:
+
+```bash
+brew bundle --file Brewfile
+```
+
+- Refresh `Brewfile` from your current machine state:
+
+```bash
+brew bundle dump --force --file Brewfile
+```
+
+Use the dump command only when you want to intentionally update package inventory.
+
 From this repo root:
 
 ```bash
 bash ./bootstrap-macos.sh
 ```
-
-The script will:
-
-1. Ensure `brew`, `stow`, and `starship` are available.
-2. Back up conflicting files to `~/.dotfiles-backup/<timestamp>/`.
-3. Stow shell and tmux dotfiles into `$HOME`.
-4. Symlink Neovim and Starship config from this repo into `~/.config`.
 
 After bootstrap, reload shell:
 

@@ -45,6 +45,11 @@ main() {
   ensure_pkg stow
   ensure_pkg starship
 
+  if [[ -f "$REPO_DIR/Brewfile" ]]; then
+    log "Installing packages from Brewfile..."
+    brew bundle --file "$REPO_DIR/Brewfile"
+  fi
+
   backup_path "$HOME/.zshrc"
   backup_path "$HOME/.zprofile"
   backup_path "$HOME/.zshenv"
