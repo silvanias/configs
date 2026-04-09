@@ -36,14 +36,14 @@ if command -v fastfetch >/dev/null 2>&1; then
 fi
 
 # >>> conda initialize >>>
-if [[ -x "/Users/silasmaughan/anaconda3/bin/conda" ]]; then
-  __conda_setup="$('/Users/silasmaughan/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+if [[ -x "$HOME/anaconda3/bin/conda" ]]; then
+  __conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
   if [[ $? -eq 0 ]]; then
     eval "$__conda_setup"
-  elif [[ -f "/Users/silasmaughan/anaconda3/etc/profile.d/conda.sh" ]]; then
-    source "/Users/silasmaughan/anaconda3/etc/profile.d/conda.sh"
+  elif [[ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
+    source "$HOME/anaconda3/etc/profile.d/conda.sh"
   else
-    export PATH="/Users/silasmaughan/anaconda3/bin:$PATH"
+    export PATH="$HOME/anaconda3/bin:$PATH"
   fi
   unset __conda_setup
 fi
