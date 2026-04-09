@@ -4,3 +4,4 @@
 !.config/starship.toml
 .cache/
 .local/
+nvim.log
