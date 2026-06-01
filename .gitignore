@@ -2,6 +2,8 @@
 !.config/nvim/
 !.config/nvim/**
 !.config/starship.toml
+!.config/ghostty/
+!.config/ghostty/**
 .cache/
 .local/
 nvim.log

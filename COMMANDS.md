@@ -26,11 +26,20 @@ cd ~/CodingProjects/configs
 # Shell + tmux (symlinks into $HOME)
 stow -d stow -t "$HOME" shell tmux
 
-# Neovim + Starship (if you changed those)
+# Neovim + Starship + Ghostty (if you changed those)
 ln -sf "$(pwd)/.config/nvim" "$HOME/.config/nvim"
 ln -sf "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
+mkdir -p "$HOME/.config/ghostty"
+ln -sf "$(pwd)/.config/ghostty/config" "$HOME/.config/ghostty/config"
 
 exec zsh
+```
+
+### Packages
+
+```bash
+brew bundle --file Brewfile          # minimal core (run by bootstrap)
+brew bundle --file Brewfile.extras   # optional heavy packages
 ```
 
 ### tmux plugins (one-time or after plugin changes)
@@ -49,13 +58,14 @@ ta
 # then Ctrl-a, I
 ```
 
-### Cursor terminal font (icons in Starship)
+### Terminal font (icons in Starship)
 
-Set in **Cursor Settings → Terminal → Integrated: Font Family**:
+- **Ghostty:** handled by `~/.config/ghostty/config` (`font-family = JetBrainsMono Nerd Font`). No manual step.
+- **Cursor:** Settings → Terminal → Integrated: Font Family →
+  `'JetBrainsMono NFM', 'JetBrainsMono Nerd Font Mono', monospace`
+- **iTerm:** Profiles → Text → Font → a JetBrainsMono Nerd Font.
 
-`'JetBrainsMono NFM', 'JetBrainsMono Nerd Font Mono', monospace`
-
-Reload the window or open a new terminal tab.
+Reload the window or open a new terminal tab after changing.
 
 ---
 
@@ -226,6 +236,8 @@ Outside Neovim use `Alt` + arrows for tmux panes. Arrow keys are disabled in Nor
 | tmux | `stow/tmux/.tmux.conf` | `~/.tmux.conf` → stow symlink |
 | Neovim | `.config/nvim/` | `~/.config/nvim` → repo symlink |
 | Starship | `.config/starship.toml` | `~/.config/starship.toml` → repo symlink |
+| Ghostty | `.config/ghostty/config` | `~/.config/ghostty/config` → repo symlink |
+| Packages | `Brewfile` (core), `Brewfile.extras` (optional) | installed via `brew bundle` |
 | tmux plugins | — | `~/.tmux/plugins/` (not in repo) |
 
 ---

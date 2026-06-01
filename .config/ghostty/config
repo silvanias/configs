@@ -1,0 +1,22 @@
+# Ghostty configuration — https://ghostty.org/docs/config
+# Symlinked to ~/.config/ghostty/config by bootstrap-macos.sh
+
+# Nerd Font so Starship prompt icons render
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+
+# Send macOS Option as Alt/Meta (needed for tmux Alt-key bindings, e.g. Alt+arrows)
+macos-option-as-alt = true
+
+# Gruvbox dark — matches Starship palette + tmux theme.
+# Prefer the bundled theme if your Ghostty version has it:
+#   theme = "Gruvbox Dark"
+background = #282828
+foreground = #ebdbb2
+cursor-color = #ebdbb2
+selection-background = #504945
+selection-foreground = #ebdbb2
+
+# Quality-of-life
+mouse-hide-while-typing = true
+copy-on-select = clipboard

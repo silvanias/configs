@@ -85,6 +85,7 @@ main() {
   backup_path "$HOME/.tmux.conf"
   backup_path "$HOME/.config/nvim"
   backup_path "$HOME/.config/starship.toml"
+  backup_path "$HOME/.config/ghostty/config"
 
   stow -d "$REPO_DIR/stow" -t "$HOME" shell
   stow -d "$REPO_DIR/stow" -t "$HOME" tmux
@@ -98,12 +99,14 @@ main() {
 
   safe_link "$REPO_DIR/.config/nvim" "$HOME/.config/nvim"
   safe_link "$REPO_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
+  safe_link "$REPO_DIR/.config/ghostty/config" "$HOME/.config/ghostty/config"
 
   log ""
-  log "Bootstrap complete."
+  log "Bootstrap complete (minimal core installed)."
   log "Open a new terminal session or run: exec zsh"
   log ""
   log "tmux: run 'ta', then Ctrl-a+I to install plugins. See COMMANDS.md for keybinds."
+  log "Optional heavy packages: brew bundle --file \"$REPO_DIR/Brewfile.extras\""
 }
 
 main "$@"
