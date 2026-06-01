@@ -22,7 +22,10 @@ ensure_pkg() {
 
 backup_path() {
   local path="$1"
-  if [[ -e "$path" && ! -L "$path" ]]; then
+  if [[ -L "$path" ]]; then
+    rm "$path"
+    log "Removed existing symlink $path (stow will recreate)"
+  elif [[ -e "$path" ]]; then
     mkdir -p "$BACKUP_DIR"
     mv "$path" "$BACKUP_DIR/"
     log "Backed up $path -> $BACKUP_DIR/"

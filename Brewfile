@@ -13,6 +13,7 @@ brew "neovim"
 brew "tmux"
 brew "stow"
 brew "starship"
+cask "ghostty"
 
 # Shell utilities referenced by .zshrc / aliases
 brew "eza"        # ls replacement (aliased in .zshrc)
