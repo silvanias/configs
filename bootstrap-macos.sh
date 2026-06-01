@@ -40,6 +40,24 @@ safe_link() {
   log "Linked $dst -> $src"
 }
 
+ensure_omz() {
+  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+    log "Installing Oh My Zsh..."
+    RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+}
+
+ensure_omz_plugin() {
+  local name="$1"
+  local repo="$2"
+  local dest="$HOME/.oh-my-zsh/custom/plugins/$name"
+  if [[ ! -d "$dest" ]]; then
+    log "Installing OMZ plugin: $name"
+    git clone --depth=1 "$repo" "$dest"
+  fi
+}
+
 main() {
   ensure_brew
   ensure_pkg stow
@@ -47,8 +65,17 @@ main() {
 
   if [[ -f "$REPO_DIR/Brewfile" ]]; then
     log "Installing packages from Brewfile..."
-    brew bundle --file "$REPO_DIR/Brewfile"
+    if ! brew bundle --file "$REPO_DIR/Brewfile"; then
+      log "Warning: 'brew bundle' had errors. Common causes:"
+      log "  - VS Code CLI ('code') not installed → vscode \"...\" lines fail"
+      log "  - A tap/cask requires manual approval on first install"
+      log "Continuing; rerun 'brew bundle --file Brewfile' after resolving."
+    fi
   fi
+
+  ensure_omz
+  ensure_omz_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
+  ensure_omz_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
 
   backup_path "$HOME/.zshrc"
   backup_path "$HOME/.zprofile"
@@ -62,12 +89,21 @@ main() {
   stow -d "$REPO_DIR/stow" -t "$HOME" shell
   stow -d "$REPO_DIR/stow" -t "$HOME" tmux
 
+  TPM_DIR="$HOME/.tmux/plugins/tpm"
+  if [[ ! -d "$TPM_DIR" ]]; then
+    log "Installing TPM (tmux plugin manager)..."
+    mkdir -p "$HOME/.tmux/plugins"
+    git clone https://github.com/tmux-plugins/tpm.git "$TPM_DIR"
+  fi
+
   safe_link "$REPO_DIR/.config/nvim" "$HOME/.config/nvim"
   safe_link "$REPO_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
 
   log ""
   log "Bootstrap complete."
   log "Open a new terminal session or run: exec zsh"
+  log ""
+  log "tmux: run 'ta', then Ctrl-a+I to install plugins. See COMMANDS.md for keybinds."
 }
 
 main "$@"

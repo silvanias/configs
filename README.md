@@ -2,6 +2,8 @@
 
 Personal macOS-focused dotfiles with Linux-inspired ergonomics.
 
+**Shortcuts & how to apply:** see [COMMANDS.md](./COMMANDS.md).
+
 ## What this repo manages
 
 - Shell startup files via GNU Stow:
@@ -16,48 +18,79 @@ Personal macOS-focused dotfiles with Linux-inspired ergonomics.
   - `.config/nvim`
   - `.config/starship.toml`
 
-## Bootstrap on macOS
+## Prerequisites (fresh Mac)
+
+1. **Xcode Command Line Tools** (provides `git`):
+
+   ```bash
+   xcode-select --install
+   ```
+
+2. **Homebrew** ([brew.sh](https://brew.sh)):
+
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+3. (Optional) Install **Cursor** or **VS Code** *before* running bootstrap if you want the `vscode "..."` Brewfile entries to install successfully. Without one of them, the bundle step warns and continues — you can rerun later.
+
+## Bootstrap
+
+```bash
+git clone https://github.com/silvanias/configs.git ~/CodingProjects/configs
+cd ~/CodingProjects/configs
+bash ./bootstrap-macos.sh
+exec zsh
+```
 
 The script will:
 
-1. Ensure `brew`, `stow`, and `starship` are available.
-2. Install declared packages from `Brewfile` using `brew bundle`.
-3. Back up conflicting files to `~/.dotfiles-backup/<timestamp>/`.
-4. Stow shell and tmux dotfiles into `$HOME`.
-5. Symlink Neovim and Starship config from this repo into `~/.config`.
+1. Verify `brew` is installed; install `stow` and `starship` if missing.
+2. Install everything from `Brewfile` via `brew bundle` (warns on failure, continues).
+3. Install **Oh My Zsh** if missing.
+4. Install the `zsh-autosuggestions` and `zsh-syntax-highlighting` OMZ plugins.
+5. Back up any conflicting files in `$HOME` to `~/.dotfiles-backup/<timestamp>/`.
+6. Stow shell + tmux dotfiles into `$HOME`.
+7. Clone **TPM** (tmux plugin manager) into `~/.tmux/plugins/tpm`.
+8. Symlink Neovim and Starship configs into `~/.config`.
 
-## Track installed packages
-
-This repo includes a `Brewfile` so machine setup is reproducible.
-
-- Install all declared packages:
-
-```bash
-brew bundle --file Brewfile
-```
-
-- Refresh `Brewfile` from your current machine state:
-
-```bash
-brew bundle dump --force --file Brewfile
-```
-
-Use the dump command only when you want to intentionally update package inventory.
-
-From this repo root:
-
-```bash
-bash ./bootstrap-macos.sh
-```
-
-After bootstrap, reload shell:
+After bootstrap:
 
 ```bash
 exec zsh
+ta                  # start tmux session "main"
+# inside tmux: press Ctrl-a then I  → installs TPM plugins
 ```
+
+In **Cursor**, set the terminal font to a Nerd Font for prompt icons (see [COMMANDS.md](./COMMANDS.md#cursor-terminal-font-icons-in-starship)).
+
+## Track installed packages
+
+`Brewfile` is the source of truth for installed packages.
+
+```bash
+brew bundle --file Brewfile           # install
+brew bundle dump --force --file Brewfile  # refresh from current machine state
+```
+
+## tmux
+
+Config lives at `stow/tmux/.tmux.conf` (stowed to `~/.tmux.conf`).
+
+Inspired by [Dreams of Code's tmux setup](https://github.com/dreamsofcode-io/tmux), adapted for this repo:
+
+- **Prefix:** `Ctrl-a` + key as a chord (e.g. `Ctrl-a` `\` to split) — see [COMMANDS.md](./COMMANDS.md)
+- **Theme:** [egel/tmux-gruvbox](https://github.com/egel/tmux-gruvbox) (`dark256`) to match Starship's gruvbox palette
+- **Plugins (TPM):** sensible, gruvbox, vim-tmux-navigator, yank
+
+**Daily keys:** `Ctrl-a` `\` split · `Ctrl-a` `-` stack · `Ctrl-a` `x` close pane · `Alt` + arrows move panes — see [COMMANDS.md](./COMMANDS.md)
+
+Neovim loads `vim-tmux-navigator` from `.config/nvim/lua/plugins/tmux.lua`.
 
 ## Notes
 
 - Neovim uses `~/.config/nvim` (symlinked to this repo).
 - Prompt uses Starship config at `~/.config/starship.toml`.
 - Icons in prompt require a Nerd Font in your terminal profile.
+- `fastfetch` is skipped when already inside tmux.
+- The tmux `Ctrl-h/j/k/l` passthrough preserves zsh's emacs bindings (backspace / clear, etc.) while still letting Neovim navigate splits.

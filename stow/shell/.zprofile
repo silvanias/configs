@@ -13,3 +13,9 @@ if [[ -d "/usr/local/texlive/2024/bin/universal-darwin" ]]; then
 fi
 
 export PATH
+
+# pipx user-installed binaries
+if [[ -d "$HOME/.local/bin" ]]; then
+  path+=("$HOME/.local/bin")
+fi
+export PATH

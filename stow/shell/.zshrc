@@ -31,7 +31,7 @@ if command -v eza >/dev/null 2>&1; then
   alias la="eza -a --group-directories-first"
 fi
 
-if command -v fastfetch >/dev/null 2>&1; then
+if command -v fastfetch >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
   fastfetch
 fi
 
@@ -59,9 +59,17 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# tmux (attach default session or create "main")
+if command -v tmux >/dev/null 2>&1; then
+  alias ta='tmux attach -t main 2>/dev/null || tmux new -s main'
+  alias tl='tmux list-sessions'
+  alias ts='tmux new-session -s'
+fi
+
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
 export HOMEBREW_NO_ENV_HINTS=1
+# $HOME/.local/bin is added in .zprofile (pipx)
